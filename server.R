@@ -1,45 +1,86 @@
 require(googleVis)
 require(shiny)
 require(dplyr)
+require(tidyr)
 load("data/pbg.Rda") 
-load("data/empresas.Rda")
+
 
 
 shinyServer(function(input, output) {
   data<-reactive({
-    a<-pbg %>% select(Ano, Provincia, PBG.a.precios.de.mercado..aproximados..,Code)
-    a<-pbg %>% filter(Ano==input$year)
+    a<-pbg %>% filter(Ano==input$year_map)
     a<-droplevels(a)
     return(a)
   })
   
   output$mapa <- renderGvis({
-    gvisGeoChart(data(), locationvar="Code", colorvar=input$variable, hovervar="Provincia", options=list(region="AR", displayMode="region", resolution="provinces", width=600, height=400))  
+    gvisGeoChart(data(), locationvar="Code", colorvar=input$variable_map, hovervar="Provincia", options=list(region="AR", displayMode="region", resolution="provinces", width=600, height=400))  
   })
+  
   
   
   data2<-reactive({
-    a<-empresas %>% select(year, Provincia, Empresas.Total,Code)
-    a<-empresas %>% filter(year==input$year2)
+    a<-filter(pbg,Ano==input$year, Code==input$provincia)
+    a<-a[5:21]
+    a<-data.frame(t(a))
+    a$labelvar<-row.names(a)
+    a<-a[c(2,1)]
     a<-droplevels(a)
     return(a)
   })
   
-  output$mapaxsector <- renderGvis({
-    gvisGeoChart(data2(), locationvar="Code", colorvar=input$variable2, hovervar="Provincia", options=list(region="AR", displayMode="region", resolution="provinces", width=600, height=400))  
+  output$piechart <- renderGvis({
+    gvisPieChart(data2(), labelvar="labelvar", numvar="t.a.", options=list(width=600, height=450))
   })
+  
   
   
   data3<-reactive({
-    a<-empleo %>% select(year, Provincia, Empleo.Formal.Total,Code)
-    a<-empleo %>% filter(year==input$year3)
+    a<-filter(pbg, Code==input$provincia2)
+    myvars <- names(a) %in% c("Ano", input$variable2)
+    a <- data.frame(a[myvars])
+    a$Ano<-round(a$Ano,0)
     a<-droplevels(a)
     return(a)
   })
   
-  output$mapaxempleo <- renderGvis({
-    gvisGeoChart(data3(), locationvar="Code", colorvar=input$variable3, hovervar="Provincia", options=list(region="AR", displayMode="region", resolution="provinces", width=600, height=400))  
+  output$linechart <- renderGvis({
+    gvisLineChart(data3(), xvar=colnames(data3())[1], yvar=colnames(data3())[-1], options=list(width=600, height=450))
   })
+  
 
+  data4<-reactive({
+    a<-select(pbg, Ano, Provincia, eval(parse(text=input$variable3)))
+    a<-reshape(a, idvar="Ano", timevar="Provincia", direction="wide")
+    names(a)<-c("Ano", "Buenos.Aires.", "Ciudad.Aurtónoma.de.Buenos.Aires.", "Catamarca", "Chaco", "Chubut", "Cordoba", "Corrientes", "Entre.Ríos", "Formosa", "Jujuy", "La.Pampa", "La.Rioja", "Mendoza", "Misiones", "Neuquén", "Río.Negro", "Salta", "San.Juan.", "San.Luis", "Santa.Cruz", "Santa.Fe", "Santiago.del.Estero", "Tierra.del.Fuego", "Tucumán")
+    myvars2 <- names(a) %in% c("Ano", input$provincia3) 
+    a <- data.frame(a[myvars2])
+    a<-droplevels(a)
+    return(a)
+  })
+  
+  output$linechartcomp <- renderGvis({
+    gvisLineChart(data4(), xvar=colnames(data4())[1], yvar=colnames(data4())[-1], options=list(width=600, height=450))
+  })
+  
 })
 
+
+#a<-select(pbg, Ano, Provincia, eval(parse(text="PBG.a.precios.de.mercado..aproximados..")))
+#a<-reshape(a, idvar="Ano", timevar="Provincia", direction="wide")
+
+
+#   a<-spread(a,Provincia, "PBG.a.precios.de.mercado..aproximados..")
+#   a<-data.frame(a)
+
+# names(pbg) 
+# rm(a)
+# rm(data_wide)
+# 
+# myvars <- names(pbg) %in% c("Ano","Provincia","PBG.a.precios.de.mercado..aproximados..")
+# a <- data.frame(pbg[myvars])
+# 
+# a<-select(pbg, Ano, Provincia, eval(parse(text="PBG.a.precios.de.mercado..aproximados..")))
+# 
+# myvars2 <- names(a) %in% c("Ano","Buenos Aires ")
+# a <- data.frame(a[myvars2])
