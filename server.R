@@ -64,23 +64,3 @@ shinyServer(function(input, output) {
   })
   
 })
-
-
-#a<-select(pbg, Ano, Provincia, eval(parse(text="PBG.a.precios.de.mercado..aproximados..")))
-#a<-reshape(a, idvar="Ano", timevar="Provincia", direction="wide")
-
-
-#   a<-spread(a,Provincia, "PBG.a.precios.de.mercado..aproximados..")
-#   a<-data.frame(a)
-
-# names(pbg) 
-# rm(a)
-# rm(data_wide)
-# 
-# myvars <- names(pbg) %in% c("Ano","Provincia","PBG.a.precios.de.mercado..aproximados..")
-# a <- data.frame(pbg[myvars])
-# 
-# a<-select(pbg, Ano, Provincia, eval(parse(text="PBG.a.precios.de.mercado..aproximados..")))
-# 
-# myvars2 <- names(a) %in% c("Ano","Buenos Aires ")
-# a <- data.frame(a[myvars2])
