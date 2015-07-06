@@ -2,39 +2,24 @@ require(googleVis)
 require(shiny)
 require(dplyr)
 require(tidyr)
- 
-load("data/rankings.Rda")
 load("data/pbg.Rda") 
+load("data/rankings.Rda")
+
 
 
 shinyServer(function(input, output) {
   
-data_salud<-reactive({
-    myvars <- c("Provincia", "Code", input$variable)
-    a <- rankings[myvars]
+  rankings<-reactive({
+    myvars <- c("rankings", "Provincia", "Code", input$ranking)
+    newdata <- mydata[myvars]
     a<-droplevels(a)
     return(a)
   })
   
   output$mapa_salud <- renderGvis({
-    gvisGeoChart(data_salud(), locationvar="Code", colorvar=input$variable, hovervar="Provincia", 
-                 options=list(region="AR", displayMode="region", resolution="provinces", 
-                              width=600, height=400, 
-                              colorAxis="{colors:['#3FAD46', '#FFFFFF']}"))  
+    gvisGeoChart(rankings(), locationvar="Code", colorvar=input$ranking, hovervar="Provincia", options=list(region="AR", displayMode="region", resolution="provinces", width=600, height=400))  
   })
   
-  
-  
-  output$tabla_ranks <- renderDataTable({
-      a <- rankings
-      myvars <- c("Provincia", input$variable)
-      a <- rankings[myvars]
-      a
-    })
-      
-    
-  
-  #PBG
   
   
   data<-reactive({
@@ -78,7 +63,7 @@ data_salud<-reactive({
     gvisLineChart(data3(), xvar=colnames(data3())[1], yvar=colnames(data3())[-1], options=list(width=600, height=450))
   })
   
-  
+
   data4<-reactive({
     a<-select(pbg, Ano, Provincia, eval(parse(text=input$variable3)))
     a<-reshape(a, idvar="Ano", timevar="Provincia", direction="wide")
@@ -92,7 +77,6 @@ data_salud<-reactive({
   output$linechartcomp <- renderGvis({
     gvisLineChart(data4(), xvar=colnames(data4())[1], yvar=colnames(data4())[-1], options=list(width=600, height=450))
   })
-  
   
 })
 
