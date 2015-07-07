@@ -1,9 +1,10 @@
 require(shiny)
 
 #Color green: rgb(63, 173, 70)
-shinyUI(navbarPage("", theme="theme.css", 
+#
+#HTML("<a href='http://lid.maimonides.edu/'><img style='float: left; margin-right:5px; width: 100px;' src='lid-logo.png' /></a")
+shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css", 
                    tabPanel("Salud",
-                            img(src = "lid_2.png", align="right"),
                             h2("La Salud en las Provincias Argentinas"),
                             br(),
                             p("El Laboratorio de Ideas en Desarrollo - LiD,  se dedica a la investigación y difusión de ideas para promover el desarrollo equitativo y sostenible, combinando análisis riguroso y multidisciplinario para generar intervenciones que tengan alto impacto social con el objetivo de alcanzar un desarrollo social y económico equitativo, inclusivo y sostenible."),
@@ -84,7 +85,6 @@ shinyUI(navbarPage("", theme="theme.css",
                               
                             )), #Salud Finishes
                    tabPanel("PBG",
-                            img(src = "lid_2.png", align="right"),
                             h2("Producto Bruto Geográfico de Argentina"),
                             br(),
                             p("El Laboratorio de Ideas en Desarrollo - LiD,  se dedica a la investigación y difusión de ideas para promover el desarrollo equitativo y sostenible, combinando análisis riguroso y multidisciplinario para generar intervenciones que tengan alto impacto social con el objetivo de alcanzar un desarrollo social y económico equitativo, inclusivo y sostenible."),
@@ -244,7 +244,7 @@ shinyUI(navbarPage("", theme="theme.css",
                                                             selected = "PBG.a.precios.de.mercado..aproximados.."
                                          )
                                        ),
-                                       mainPanel(list(h3("Evolucioón del Producto Bruto Geografico"), p("En estos graficos usted puede observar la evolución del PBG y sus componentes ")), htmlOutput("linechart"), p("Nota: Si no se produce un grafico es porque no hay datos disponibles"))
+                                       mainPanel(list(h3("Evolución del Producto Bruto Geografico"), p("En estos graficos usted puede observar la evolución del PBG y sus componentes ")), htmlOutput("linechart"), p("Nota: Si no se produce un grafico es porque no hay datos disponibles"))
                                      ),
                                      HTML("<script>$('#Evolucion').click(function() {
 						                                tabs = $('.tabbable .nav.nav-tabs li')
@@ -402,15 +402,10 @@ shinyUI(navbarPage("", theme="theme.css",
                                 						 
                                 					 })</script>")
                             )
-                            
                             ) 
                    ),
-                   tabPanel("Nosotros",
-                            img(src = "lid_2.png", align="right"),
-                            h2("Producto Bruto Geográfico de Argentina"),
-                            br(),
-                            p("El Laboratorio de Ideas en Desarrollo - LiD,  se dedica a la investigación y difusión de ideas para promover el desarrollo equitativo y sostenible, combinando análisis riguroso y multidisciplinario para generar intervenciones que tengan alto impacto social con el objetivo de alcanzar un desarrollo social y económico equitativo, inclusivo y sostenible.")
-                   )
+                   tabPanel(HTML("</a></li><li><a href=\'http://lid.maimonides.edu/'>Volver al Sitio"))
+                   
                   
                    ))
                             
