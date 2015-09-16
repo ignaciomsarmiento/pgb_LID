@@ -93,7 +93,7 @@ data_salud<-reactive({
     gvisLineChart(data4(), xvar=colnames(data4())[1], yvar=colnames(data4())[-1], options=list(width=600, height=450))
   })
   
-  
+
 })
 
 

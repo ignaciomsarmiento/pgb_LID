@@ -37,7 +37,11 @@ shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css",
                                                         br(),
                                                         p("5)	El INDICADOR SINTETICO DE SALUD, se conforma por dos indicadores que usualmente se utilizan de forma separada, aunque se consideran posibles ponderaciones para generar un único indicador. Así, se considera un INDICADOR DE RESULTADOS DE SALUD, que pondera tanto la información de longitud y expectativa de vida como la calidad de la misma. Por otro lado, se calcula un INDICADOR DE FACTORES DE SALUD, que contempla aquellos factores de salud, comportamiento, ambiente, infraestructura socio económico, etc. que influyen críticamente en el estado de salud de la población."),
                                                         br(),
-                                                        p("6)	La información base, el INDICADOR SINTETICO DE SALUD LiD, así como los dos indicadores correspondientes, INDICADOR DE RESULTADOS DE SALUD E INDICADOR DE FACTORES DE SALUD y el indicador estarán disponibles en la base del Lid y podrán observarse a través de mapas temáticos y cuadros comparativos.")))
+                                                        p("6)	La información base, el INDICADOR SINTETICO DE SALUD LiD, así como los dos indicadores correspondientes, INDICADOR DE RESULTADOS DE SALUD E INDICADOR DE FACTORES DE SALUD y el indicador estarán disponibles en la base del Lid y podrán observarse a través de mapas temáticos y cuadros comparativos."),
+                                                        p("6)	La información base, el INDICADOR SINTETICO DE SALUD LiD, así como los dos indicadores correspondientes, INDICADOR DE RESULTADOS DE SALUD E INDICADOR DE FACTORES DE SALUD y el indicador estarán disponibles en la base del Lid y podrán observarse a través de mapas temáticos y cuadros comparativos."),
+                                                        p("Para mas detalle sobre el Indicador de Salud haga", tags$a(href = 'https://www.dropbox.com/s/2dwpi34jezdje71/WP_03_RANKING_SALUD_Pre01.pdf?dl=0',  target="_blank",  'click aqui', icon("download")))
+                                                        
+                                         ))
                               )),
                               tabPanel("Rankings",
                                        sidebarLayout(
@@ -62,25 +66,26 @@ shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css",
                                                             tags$li("Comportamientos de Salud"), 
                                                             tags$li("Cuidados Clínicos"),
                                                             tags$li("Socio Económicos")
-                                                          )
+                                                          ),
+                                                          p("Para mas detalle sobre el Indicador de Salud haga", tags$a(href = 'https://www.dropbox.com/s/2dwpi34jezdje71/WP_03_RANKING_SALUD_Pre01.pdf?dl=0',  target="_blank",  'click aqui', icon("download")))
                                                           )),htmlOutput("mapa_salud"), dataTableOutput(outputId="tabla_ranks"))
                                        ), 
                                        HTML("<script>$('#Rankings').click(function() {
 						                                tabs = $('.tabbable .nav.nav-tabs li')
-                                					 	 tabs.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabs[1]).addClass('active')
-                                						
-                                						 tabsContents = $('.tabbable .tab-content .tab-pane')
-                                					 	 tabsContents.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabsContents[1]).addClass('active')
-                                
-                                						$('#Rankings').trigger('change').trigger('shown');
-                                						 
-                                					 })</script>")
+                                        tabs.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabs[1]).addClass('active')
+
+                                        tabsContents = $('.tabbable .tab-content .tab-pane')
+                                        tabsContents.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabsContents[1]).addClass('active')
+
+                                        $('#Rankings').trigger('change').trigger('shown');
+
+                                        })</script>")
                                        )
                               
                             )), #Salud Finishes
@@ -172,21 +177,21 @@ shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css",
                                        mainPanel(list(h3("Composición del Producto Bruto Geografico"), p("En estos graficos de torta usted puede observar la composición del PBG de la provincia seleccionada para el año seleccionado ")), htmlOutput("piechart"), p("Nota: Si no se produce un grafico es porque no hay datos disponibles"))
                                        ),
                                        HTML("<script>$('#Composicion').click(function() {
-						                                tabs = $('.tabbable .nav.nav-tabs li')
-                                					 	 tabs.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabs[1]).addClass('active')
-                                						
-                                						 tabsContents = $('.tabbable .tab-content .tab-pane')
-                                					 	 tabsContents.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabsContents[1]).addClass('active')
-                                
-                                						$('#Composicion').trigger('change').trigger('shown');
-                                						 
-                                					 })</script>")
+                                        tabs = $('.tabbable .nav.nav-tabs li')
+                                        tabs.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabs[3]).addClass('active')
+
+                                        tabsContents = $('.tabbable .tab-content .tab-pane')
+                                        tabsContents.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabsContents[3]).addClass('active')
+
+                                        $('#Composicion').trigger('change').trigger('shown');
+
+                                        })</script>")
                                      ),
                             tabPanel("Evolución",
                                      sidebarLayout(
@@ -247,21 +252,21 @@ shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css",
                                        mainPanel(list(h3("Evolución del Producto Bruto Geografico"), p("En estos graficos usted puede observar la evolución del PBG y sus componentes ")), htmlOutput("linechart"), p("Nota: Si no se produce un grafico es porque no hay datos disponibles"))
                                      ),
                                      HTML("<script>$('#Evolucion').click(function() {
-						                                tabs = $('.tabbable .nav.nav-tabs li')
-                                					 	 tabs.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabs[1]).addClass('active')
-                                						
-                                						 tabsContents = $('.tabbable .tab-content .tab-pane')
-                                					 	 tabsContents.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabsContents[1]).addClass('active')
-                                
-                                						$('#Evolucion').trigger('change').trigger('shown');
-                                						 
-                                					 })</script>")
+                                        tabs = $('.tabbable .nav.nav-tabs li')
+                                        tabs.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabs[4]).addClass('active')
+
+                                        tabsContents = $('.tabbable .tab-content .tab-pane')
+                                        tabsContents.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabsContents[4]).addClass('active')
+
+                                        $('#Evolucion').trigger('change').trigger('shown');
+
+                                        })</script>")
                             ),
                             tabPanel("Comparación",
                                      sidebarLayout(
@@ -319,24 +324,24 @@ shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css",
                                                             selected = "Chubut"
                                          )
                                        ),
-                                       mainPanel(list(h3("Comparacioón del Producto Bruto Geografico"), p("En estos graficos usted puede comparar la evolución del PBG y sus componentes por provincia ")), htmlOutput("linechartcomp"), p("Nota: Si no se produce un grafico es porque no hay datos disponibles"))
+                                       mainPanel(list(h3("Comparación del Producto Bruto Geografico"), p("En estos graficos usted puede comparar la evolución del PBG y sus componentes por provincia ")), htmlOutput("linechartcomp"), p("Nota: Si no se produce un grafico es porque no hay datos disponibles"))
                                      ),
                                      HTML("<script>$('#Comparacion').click(function() {
-						                                tabs = $('.tabbable .nav.nav-tabs li')
-                                					 	 tabs.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabs[1]).addClass('active')
-                                						
-                                						 tabsContents = $('.tabbable .tab-content .tab-pane')
-                                					 	 tabsContents.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabsContents[1]).addClass('active')
-                                
-                                						$('#summary').trigger('change').trigger('shown');
-                                						 
-                                					 })</script>")
+                                        tabs = $('.tabbable .nav.nav-tabs li')
+                                          tabs.each(function() {
+                                          $(this).removeClass('active')
+                                          })
+                                          $(tabs[5]).addClass('active')
+                                          
+                                          tabsContents = $('.tabbable .tab-content .tab-pane')
+                                          tabsContents.each(function() {
+                                          $(this).removeClass('active')
+                                          })
+                                          $(tabsContents[5]).addClass('active')
+                                          
+                                          $('#Comparacion').trigger('change').trigger('shown');
+                                          
+                                          })</script>")
                             ),
                             tabPanel("Mapas",
                                      sidebarLayout(
@@ -386,25 +391,25 @@ shinyUI(navbarPage(img(src = "lid-logo.png" ), theme="theme.css",
                                        mainPanel(h3("Mapas"),htmlOutput("mapa"))
                                      ),
                                      HTML("<script>$('#Mapas').click(function() {
-						                                tabs = $('.tabbable .nav.nav-tabs li')
-                                					 	 tabs.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabs[1]).addClass('active')
-                                						
-                                						 tabsContents = $('.tabbable .tab-content .tab-pane')
-                                					 	 tabsContents.each(function() {
-                                							$(this).removeClass('active')
-                                					 	 })
-                                						 $(tabsContents[1]).addClass('active')
-                                
-                                						$('#summary').trigger('change').trigger('shown');
-                                						 
-                                					 })</script>")
+                                        tabs = $('.tabbable .nav.nav-tabs li')
+                                        tabs.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabs[6]).addClass('active')
+
+                                        tabsContents = $('.tabbable .tab-content .tab-pane')
+                                        tabsContents.each(function() {
+                                        $(this).removeClass('active')
+                                        })
+                                        $(tabsContents[6]).addClass('active')
+
+                                        $('#Mapas').trigger('change').trigger('shown');
+
+                                        })</script>")
                             )
                             ) 
                    ),
-                   tabPanel(HTML("</a></li><li><a href=\'http://lid.maimonides.edu/'>Volver al Sitio"))
+                   tabPanel(HTML("</a></li><li><a href=\'http://lid.maimonides.edu/' target='_blank'>Volver al Sitio"))
                    
                   
                    ))
